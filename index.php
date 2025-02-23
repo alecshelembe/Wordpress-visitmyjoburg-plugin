@@ -1,1 +1,1 @@
-<?php echo("Mmm.. visit the plgin repo instead");?>
+<?php echo"Visit the plugin repo on github"?>

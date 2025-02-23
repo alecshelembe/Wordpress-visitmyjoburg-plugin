@@ -34,6 +34,30 @@ function get_website_info() {
     ];
 }
 
+// REST API endpoint restricted by secret key
+function register_website_info_endpoint() {
+    register_rest_route('visitmyjoburg/v1', '/info', [
+        'methods' => 'GET',
+        'callback' => 'handle_website_info_request',
+        'permission_callback' => '__return_true'
+    ]);
+}
+add_action('rest_api_init', 'register_website_info_endpoint');
+
+function handle_website_info_request(WP_REST_Request $request) {
+    $allowed_origin = 'https://visitmyjoburg.co.za';
+    $secret_key = '1qazsw34dc'; // Replace with your secret key
+
+    $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+    $provided_key = $request->get_param('key');
+
+    if ($origin === $allowed_origin && $provided_key === $secret_key) {
+        return get_website_info();
+    } else {
+        return new WP_REST_Response(['error' => 'Unauthorized'], 403);
+    }
+}
+
 // Shortcode function
 function website_info_shortcode() {
     $info = get_website_info();
@@ -57,7 +81,7 @@ function website_info_shortcode() {
                     <p style='color: #555;'>{$info['site_tagline']}</p>
                     <!--<p style='font-size: 12px; color: #888;'>URL: {$info['site_url']}</p>-->
                     <p style='font-size: 12px; color: #888;'>Promotor: {$info['admin_email']}</p>
-                    <p style='margin-top: 12px;'><a href='{$search_link}' target='_blank' style='color: #0073aa; text-decoration: none;'>Open this</a></p>
+                    <p style='margin-top: 12px; text-align: center;'><a href='{$search_link}' target='_blank' style='color: #0073aa; text-decoration: none;'>Open this</a></p>
                 </div>
             </div>
         </div>
