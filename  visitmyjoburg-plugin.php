@@ -61,7 +61,8 @@ function handle_website_info_request(WP_REST_Request $request) {
 // Shortcode function
 function website_info_shortcode() {
     $info = get_website_info();
-    $search_link = "https://visitmyjoburg.co.za/search-for-posts?query=" . urlencode($info['site_name']);
+    // $search_link = "https://visitmyjoburg.co.za/search-for-posts?query=" . urlencode($info['site_name']);
+    $search_link = "https://visitmyjoburg.co.za/";
 
     $output = "
     <div id='website-info-wrapper' style='position: fixed; bottom: 16px; left: 16px; z-index: 50;'>
