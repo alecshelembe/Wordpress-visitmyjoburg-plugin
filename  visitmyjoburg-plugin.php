@@ -81,7 +81,7 @@ function website_info_shortcode() {
                     <p style='color: #555;'>{$info['site_tagline']}</p>
                     <!--<p style='font-size: 12px; color: #888;'>URL: {$info['site_url']}</p>-->
                     <p style='font-size: 12px; color: #888;'>Promotor: {$info['admin_email']}</p>
-                    <p style='margin-top: 12px; text-align: center;'><a href='{$search_link}' target='_blank' style='color: #0073aa; text-decoration: none;'>Open</a></p>
+                    <p style='margin-top: 12px; text-align: center;'><a href='{$search_link}' target='_blank' >Open</a></p>
                 </div>
             </div>
         </div>
